@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HlWypvpgkuJ6A+J1vN88z9LSq6zZ+Nk0vIPxnQMURQ5uxFuDKy0X/SC+nQZpCaDiqU0pFpGlTGhBnVtWSub0vA==",
+  "dgSpecHash": "N5hQR3hDAcweuREYpr8F2Oq/sMQM+EoCYezAXnAaut79NQK2t3vGCQcKf2w2jUADsk8Kx1XAefsRIM9qqdEY+g==",
   "success": true,
-  "projectFilePath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj",
+  "projectFilePath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

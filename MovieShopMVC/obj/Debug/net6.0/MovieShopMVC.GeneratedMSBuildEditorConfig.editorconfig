@@ -8,41 +8,41 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MovieShopMVC
 build_property.RootNamespace = MovieShopMVC
-build_property.ProjectDir = D:\Antra\ASP.NET\MovieShip\MovieShopMVC\
+build_property.ProjectDir = D:\Antra\ASP.NET\MovieShop\MovieShopMVC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Antra\ASP.NET\MovieShip\MovieShopMVC
+build_property.MSBuildProjectDirectory = D:\Antra\ASP.NET\MovieShop\MovieShopMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Home/Index.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Home/Privacy.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Home/TopRatedMovies.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Home/TopRatedMovies.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUb3BSYXRlZE1vdmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Shared/Error.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/_ViewImports.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/_ViewStart.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Antra/ASP.NET/MovieShip/MovieShopMVC/Views/Shared/_Layout.cshtml]
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-29xxaf60eq

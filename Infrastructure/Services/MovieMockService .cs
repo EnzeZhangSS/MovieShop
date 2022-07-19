@@ -1,5 +1,4 @@
-﻿using ApplicationCore.Contracts.Repository;
-using ApplicationCore.Contracts.Services;
+﻿using ApplicationCore.Contracts.Services;
 using ApplicationCore.Models;
 using Infrastructure.Repository;
 using System;
@@ -10,17 +9,12 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class MovieService : IMovieService
+    public class MovieMockService : IMovieService
     {
-        private readonly IMovieRepository _movieRepository;
-        public MovieService(IMovieRepository movieRepository)
-        {
-            _movieRepository = movieRepository;
-        }
-
         public List<MovieCardModel> GetTopRevenueMovies()
         {
-            var movies = _movieRepository.GetTop30HighestRevenueMovies();
+            var movieRepository = new MovieRepository();
+            var movies = movieRepository.GetTop30HighestRevenueMovies();
 
             var movieCards = new List<MovieCardModel>();
             foreach (var movie in movies)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj": {}
+    "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {}
   },
   "projects": {
-    "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj": {
+    "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\yuanh\\.nuget\\packages\\",
-        "outputPath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\obj\\",
+        "outputPath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yuanh\\AppData\\Roaming\\NuGet\\NuGet.Config",

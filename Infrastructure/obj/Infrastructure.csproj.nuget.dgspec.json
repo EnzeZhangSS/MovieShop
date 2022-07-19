@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Antra\\ASP.NET\\MovieShip\\Infrastructure\\Infrastructure.csproj": {}
+    "D:\\Antra\\ASP.NET\\MovieShop\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj": {
+    "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\yuanh\\.nuget\\packages\\",
-        "outputPath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\obj\\",
+        "outputPath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yuanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,14 +58,14 @@
         }
       }
     },
-    "D:\\Antra\\ASP.NET\\MovieShip\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\Antra\\ASP.NET\\MovieShop\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShip\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\Antra\\ASP.NET\\MovieShop\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "D:\\Antra\\ASP.NET\\MovieShip\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "D:\\Antra\\ASP.NET\\MovieShop\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\yuanh\\.nuget\\packages\\",
-        "outputPath": "D:\\Antra\\ASP.NET\\MovieShip\\Infrastructure\\obj\\",
+        "outputPath": "D:\\Antra\\ASP.NET\\MovieShop\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yuanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj": {
-                "projectPath": "D:\\Antra\\ASP.NET\\MovieShip\\ApplicationCore\\ApplicationCore.csproj"
+              "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj": {
+                "projectPath": "D:\\Antra\\ASP.NET\\MovieShop\\ApplicationCore\\ApplicationCore.csproj"
               }
             }
           }
@@ -97,6 +97,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
