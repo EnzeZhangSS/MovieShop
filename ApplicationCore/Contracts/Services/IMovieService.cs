@@ -10,5 +10,6 @@ namespace ApplicationCore.Contracts.Services
     public interface IMovieService
     {
         List<MovieCardModel> GetTopRevenueMovies();
+        MovieDetailsModel GetMovieDetails(int movieId);
     }
 }

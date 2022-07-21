@@ -24,9 +24,16 @@ namespace ApplicationCore.Entities
         public decimal? Price { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-        public string CreatedBy { get; set; }
+        public string? UpdatedBy { get; set; }
+        public string? CreatedBy { get; set; }
 
         public decimal? Rating { get; set; }
+
+        // Navigation Property
+        public ICollection<Trailer> Trailers { get; set; }
+        public ICollection<MovieGenre> GenresOfMovie { get; set; }
+        public ICollection<MovieCast> CastsOfMovie { get; set; }
+
+
     }
 }
