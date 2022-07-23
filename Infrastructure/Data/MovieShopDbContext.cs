@@ -21,6 +21,11 @@ namespace Infrastructure.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<Cast> Casts { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +33,49 @@ namespace Infrastructure.Data
             modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
             modelBuilder.Entity<Cast>(ConfigureCast);
             modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
+            modelBuilder.Entity<User>(ConfigureUser);
+            modelBuilder.Entity<Role>(ConfigureRole);
+            modelBuilder.Entity<UserRole>(ConfigureUserRole);
+            modelBuilder.Entity<Review>(ConfigureReview);
+            modelBuilder.Entity<Favorite>(ConfigureFavorite);
+        }
+
+        private void ConfigureFavorite(EntityTypeBuilder<Favorite> builder)
+        {
+            builder.HasKey(f => new { f.UserId, f.MovieId });
+        }
+
+        private void ConfigureReview(EntityTypeBuilder<Review> builder)
+        {
+            builder.ToTable("Reviews");
+            builder.HasKey(r => new { r.UserId, r.MovieId });
+            builder.Property(r => r.ReviewText).HasMaxLength(20000);
+            builder.Property(r => r.Rating).HasColumnType("decimal(3, 2)");
+            builder.Property(r => r.CreatedDate).HasDefaultValueSql("getdate()");
+        }
+
+        private void ConfigureUserRole(EntityTypeBuilder<UserRole> builder)
+        {
+            builder.ToTable("UserRoles");
+            builder.HasKey(x => new { x.RoleId, x.UserId });
+        }
+
+        private void ConfigureRole(EntityTypeBuilder<Role> builder)
+        {
+            builder.Property(r => r.Name).HasMaxLength(64);
+        }
+
+        private void ConfigureUser(EntityTypeBuilder<User> builder)
+        {
+            builder.HasIndex(u => u.Email).IsUnique();
+            builder.Property(u => u.Email).HasMaxLength(256);
+            builder.Property(u => u.FirstName).HasMaxLength(128);
+            builder.Property(u => u.LastName).HasMaxLength(128);
+            builder.Property(u => u.HashedPassword).HasMaxLength(1024);
+            builder.Property(u => u.PhoneNumber).HasMaxLength(64);
+            builder.Property(u => u.Salt).HasMaxLength(1024);
+            builder.Property(u => u.ProfilePictureUrl).HasMaxLength(4096);
+            builder.Property(u => u.IsLocked).HasDefaultValue(false);
         }
 
         private void ConfigureMovieCast(EntityTypeBuilder<MovieCast> builder)

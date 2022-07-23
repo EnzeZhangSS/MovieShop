@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Repository
 {
-    public interface IMovieRepository
+    public interface IGenreRepository
     {
-        Task<List<Movie>> GetTop30HighestRevenueMovies();
-
-        Task<List<Movie>> GetTop30RatedMovies();
-
-        Task<Movie> GetById(int id);
+        Task<List<Genre>> GetAllGenres();
     }
 }
