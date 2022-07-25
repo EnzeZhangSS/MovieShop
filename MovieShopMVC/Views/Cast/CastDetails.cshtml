@@ -1,0 +1,67 @@
+﻿@model ApplicationCore.Models.CastDetailsModel
+
+@{
+	ViewData["Title"] = @Model.Name;
+}
+
+<div class="container-fluid">
+	<div class="row">
+		<div style="background-color:antiquewhite; height:50vh">
+			<div class="row">
+				<div class="col-3 text-end">
+					<img src="@Model.ProfilePath" style="height:50vh" />
+				</div>
+				<div class="col-5 offset-1 text-center">
+					<h1 class="text-dark pt-3">@Model.Name</h1>
+					<h3 class="text-secondary pt-3">
+						@if (@Model.Gender == "1")
+						{
+							<span>Female</span>
+						}
+						else if (@Model.Gender == "2")
+						{
+							<span>Male</span>
+						}
+						else
+						{
+							<span>Non-Binary Gender</span>
+						}
+					</h3>
+					<a href="@Model.TmdbUrl" target="_blank">
+						<button type="button" class="btn btn-dark mt-3">
+							TMDB Page
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h2 class="text-secondary">Movies</h2>
+				<hr />
+				<div class="rounded">
+					<div class="container-fluid">
+						<div class="row">
+							@foreach (var m in @Model.Movies)
+							{
+								<div class="col-xl-2 col-sm-4 col-lg-3 col-6">
+									<div class="card mb-4">
+										<a asp-controller="Movies" asp-action="Details" asp-route-id="@m.Id" class="text-decoration-none text-black">
+											<img src="@m.PosterUrl" class="img-fluid" alt="@m.Title" />
+											<div class="container-fluid">
+												<h6>
+													@m.Title
+												</h6>
+											</div>
+										</a>
+									</div>
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

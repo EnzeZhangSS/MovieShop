@@ -10,11 +10,13 @@ namespace MovieShopMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMovieService _movieService;
+        private readonly IGenreService _genreService;
 
-        public HomeController(ILogger<HomeController> logger, IMovieService movieService)
+        public HomeController(ILogger<HomeController> logger, IMovieService movieService, IGenreService genreService)
         {
             _logger = logger;
             _movieService = movieService;
+            _genreService = genreService;
         }
 
         [HttpGet]
@@ -23,6 +25,14 @@ namespace MovieShopMVC.Controllers
             var movieCards = await _movieService.GetTopRevenueMovies();
             return View(movieCards);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AllGenres()
+        {
+            var AllGenres = await _genreService.GetAllGenres();
+            return View(AllGenres);
+        }
+
 
         [HttpGet]
         public IActionResult Privacy()
