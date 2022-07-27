@@ -1,7 +1,7 @@
 ﻿@model ApplicationCore.Models.MovieDetailsModel
 
 @{
-    ViewData["Title"] = @Model.Title;
+	ViewData["Title"] = @Model.Title;
 }
 
 <div class="container-fluid">
@@ -29,10 +29,10 @@
 					</div>
 					<div class="col-3 pt-5 text-end">
 						<div class="pb-3">
-							<button type="button" class="btn btn-outline-light" style="width:60%"><i class="bi bi-pencil-square"></i> REVIEW</button>
+							<button type="button" class="btn btn-outline-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#ReviewModal"><i class="bi bi-pencil-square"></i> REVIEW</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-light" style="width:60%">BUY $@Model.Price</button>
+							<button type="button" class="btn btn-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#BuyModal">BUY $@Model.Price</button>
 						</div>
 					</div>
 				</div>
@@ -108,3 +108,56 @@
 
 </div>
 
+<div class="modal fade" id="BuyModal" tabindex="-1" aria-labelledby="BuyModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="BuyModalLabel">Confirmation</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<h3>@Model.Title</h3>
+				<h4>Price: $@Model.Price</h4>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary">Purchase</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="ReviewModal" tabindex="-1" aria-labelledby="ReviewModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ReviewModalLabel">Review</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<select class="form-select" aria-label="Rating">
+					<option selected>Rating</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+				<hr />
+				<div class="form-floating">
+					<textarea class="form-control" placeholder="Leave a review here" id="floatingTextareaReview"></textarea>
+					<label for="floatingTextareaReview">Review</label>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
