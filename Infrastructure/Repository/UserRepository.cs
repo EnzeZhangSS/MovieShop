@@ -1,5 +1,5 @@
 ﻿using ApplicationCore.Entities;
-using ApplicationCore.RepositoryContracts;
+using ApplicationCore.Contracts.Repository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repository
 {
     public class UserRepository : IUserRepository
     {

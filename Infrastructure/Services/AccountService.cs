@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.Models;
-using ApplicationCore.RepositoryContracts;
-using ApplicationCore.ServiceContracts;
+using ApplicationCore.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using ApplicationCore.Entities;
+using ApplicationCore.Contracts.Repository;
 
 namespace Infrastructure.Services
 {

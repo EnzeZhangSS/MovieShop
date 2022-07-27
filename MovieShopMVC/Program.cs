@@ -1,9 +1,6 @@
 using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Contracts.Services;
-using ApplicationCore.RepositoryContracts;
-using ApplicationCore.ServiceContracts;
 using Infrastructure.Data;
-using Infrastructure.Repositories;
 using Infrastructure.Repository;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;

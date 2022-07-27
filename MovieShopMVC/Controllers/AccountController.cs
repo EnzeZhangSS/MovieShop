@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models;
-using ApplicationCore.ServiceContracts;
+﻿using ApplicationCore.Contracts.Services;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieShopMVC.Controllers

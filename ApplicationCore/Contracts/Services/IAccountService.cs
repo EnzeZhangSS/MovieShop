@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.ServiceContracts
+namespace ApplicationCore.Contracts.Services
 {
     public interface IAccountService
     {
