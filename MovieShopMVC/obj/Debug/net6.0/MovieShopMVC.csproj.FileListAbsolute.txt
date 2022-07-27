@@ -94,3 +94,5 @@ D:\Antra\ASP.NET\MovieShop\MovieShopMVC\obj\Debug\net6.0\MovieShopMVC.genruntime
 D:\Antra\ASP.NET\MovieShop\MovieShopMVC\obj\Debug\net6.0\ref\MovieShopMVC.dll
 D:\Antra\ASP.NET\MovieShop\MovieShopMVC\bin\Debug\net6.0\Humanizer.dll
 D:\Antra\ASP.NET\MovieShop\MovieShopMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Antra\ASP.NET\MovieShop\MovieShopMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Antra\ASP.NET\MovieShop\MovieShopMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
