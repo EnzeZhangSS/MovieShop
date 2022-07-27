@@ -78,5 +78,23 @@ namespace Infrastructure.Services
             256 / 8));
             return hashed;
         }
+
+        public async Task<bool> ValidateUser(UserLoginModel model)
+        {
+            var dbUser = await _userRepository.GetUserByEmail(model.Email);
+            if (dbUser == null)
+            {
+                throw new Exception("Please register first");
+            }
+
+            var hashedPassword = GetHashedPasswordWithSalt(model.Password, dbUser.Salt);
+
+            if (hashedPassword == dbUser.HashedPassword)
+            {
+                return true;
+            }
+            return false;
+
+        }
     }
 }

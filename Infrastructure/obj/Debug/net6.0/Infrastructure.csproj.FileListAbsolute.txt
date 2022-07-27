@@ -14,6 +14,7 @@ D:\Antra\ASP.NET\MovieShip\Infrastructure\obj\Debug\net6.0\refint\Infrastructure
 D:\Antra\ASP.NET\MovieShip\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
 D:\Antra\ASP.NET\MovieShip\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
 D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
 D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
 D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
 D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\ApplicationCore.dll
@@ -27,6 +28,5 @@ D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj
 D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
 D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
 D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
-D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
-D:\Antra\ASP.NET\MovieShop\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
 D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
+D:\Antra\ASP.NET\MovieShop\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll

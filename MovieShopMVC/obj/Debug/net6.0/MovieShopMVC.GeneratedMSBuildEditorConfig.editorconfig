@@ -15,6 +15,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Antra\ASP.NET\MovieShop\MovieShopMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Antra/ASP.NET/MovieShop/MovieShopMVC/Views/Cast/CastDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzdFxDYXN0RGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
