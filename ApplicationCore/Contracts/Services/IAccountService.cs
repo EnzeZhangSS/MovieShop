@@ -11,6 +11,6 @@ namespace ApplicationCore.Contracts.Services
     {
         Task<bool> CreateUser(UserRegisterModel model);
 
-        Task<bool> ValidateUser(UserLoginModel model);
+        Task<UserInfoResponseModel> ValidateUser(UserLoginModel model);
     }
 }
