@@ -1,0 +1,24 @@
+﻿@using ApplicationCore.Models
+@model PagedResultSet<MovieCardModel>
+
+<div class="rounded">
+	<div class="container-fluid">
+		<div class="row">
+			@foreach (var movieCard in Model?.Data)
+			{
+				<div class="col-xl-2 col-sm-4 col-lg-3 col-6">
+
+					<partial name="_MovieCard" model="@movieCard" />
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+@{
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex-1)" class="btn btn-primary @prevDisabled"> Previous </a>
+<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex+1)" class="btn btn-primary @nextDisabled"> Next </a>

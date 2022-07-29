@@ -20,9 +20,6 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<div>
-
-					
 					<ul class="navbar-nav flex-grow-1">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:lightgray">
@@ -34,7 +31,7 @@
 								<li><a class="dropdown-item" href="#">3</a></li>
 							</ul>
 						</li>
-						
+
 						@*
 						<li class="nav-item">
 						<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -44,21 +41,9 @@
 						</li>
 						*@
 					</ul>
-					</div>
-					<div style="position:absolute; right:2%">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">
-								<button type="button" class="btn btn-outline-light" style="border-radius:25px">Login</button>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">
-								<button type="button" class="btn btn-outline-light" style="border-radius:25px">Register</button>
-							</a>
-						</li>
-					</ul>
-					</div>
+
+					<partial name="_LoginInfoPartial" />
+
 				</div>
 			</div>
 		</nav>
