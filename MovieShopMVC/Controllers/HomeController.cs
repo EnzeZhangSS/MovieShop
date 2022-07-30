@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Services;
+using ApplicationCore.Models;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using MovieShopMVC.Models;
@@ -22,8 +23,18 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            
             var movieCards = await _movieService.GetTopRevenueMovies();
+
             return View(movieCards);
+            
+            /*
+            var movieCards = await _movieService.GetTopRevenueMovies();
+            var AllGenres = await _genreService.GetAllGenres();
+            var Tmodel = new Tuple<List<MovieCardModel>, List<GenreModel>>(movieCards, AllGenres);
+            return View(Tmodel);
+            */
+            
         }
 
         [HttpGet]

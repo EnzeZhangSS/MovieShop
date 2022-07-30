@@ -1,0 +1,15 @@
+﻿@using ApplicationCore.Contracts.Services
+@inject IGenreService genreService
+
+<ul class="navbar-nav flex-grow-1">
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:lightgray">
+			GENRES
+		</a>
+		<ul class="dropdown-menu dropdown-menu-dark">
+            @foreach(var g in await genreService.GetAllGenres() ){
+                <li><a class="dropdown-item" asp-controller="Movies" asp-action="GenreMovies" asp-route-id="@g.Id">@g.Name</a></li>
+			}
+		</ul>
+	</li>
+</ul>
