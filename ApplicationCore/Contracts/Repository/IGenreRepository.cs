@@ -10,5 +10,7 @@ namespace ApplicationCore.Contracts.Repository
     public interface IGenreRepository
     {
         Task<List<Genre>> GetAllGenres();
+
+        Task<Genre> GetById(int id);
     }
 }

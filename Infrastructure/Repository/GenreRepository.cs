@@ -24,5 +24,11 @@ namespace Infrastructure.Repository
             var genres = await _movieShopDbContext.Genres.ToListAsync();
             return genres;
         }
-    }
+
+		public async Task<Genre> GetById(int id)
+		{
+            var genreDetails = await _movieShopDbContext.Genres.FirstOrDefaultAsync(g => g.Id == id);
+            return genreDetails;
+        }
+	}
 }
