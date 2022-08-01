@@ -23,6 +23,51 @@ namespace Infrastructure.Services
             _purchaseRepository = purchaseRepository;
         }
 
+        public async Task<bool> AddFavorite(UserFavoriteRequestModel favoriteRequest)
+        {
+            if (await FavoriteExists(favoriteRequest.UserId, favoriteRequest.MovieId) == true)
+            {
+                throw new Exception("You already add this movie to favorite list!");
+            }
+
+            var dbFavorite = new Favorite
+            {
+                UserId = favoriteRequest.UserId,
+                MovieId = favoriteRequest.MovieId
+            };
+            var savedFavorite = await _userRepository.AddFavorite(dbFavorite);
+            if (savedFavorite.UserId > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> FavoriteExists(int userid, int movieId)
+        {
+            var favorite = await _userRepository.GetFavoriteById(userid, movieId);
+            if (favorite == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<PagedResultSet<MovieCardModel>> GetAllFavoritesForUser(int userid, int pageSize = 30, int page = 1)
+        {
+            var movies = await _userRepository.GetAllFavoritesPagination(userid, pageSize, page);
+
+            var movieCards = new List<MovieCardModel>();
+            movieCards.AddRange(movies.Data.Select(m => new MovieCardModel
+            {
+                Id = m.Id,
+                PosterUrl = m.PosterUrl,
+                Title = m.Title
+            }));
+
+            return new PagedResultSet<MovieCardModel>(movieCards, page, pageSize, movies.TotalRowCount);
+        }
+
         public async Task<PagedResultSet<MovieCardModel>> GetAllPurchasesForUser(int userid, int pageSize = 30, int page = 1)
         {
             var movies = await _purchaseRepository.GetAllPurchasesPagination(userid, pageSize, page);
@@ -81,6 +126,27 @@ namespace Infrastructure.Services
             };
             var savedPurchase = await _userRepository.AddPurchase(dbPurchase);
             if (savedPurchase.UserId > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> RemoveFavorite(UserFavoriteRequestModel favoriteRequest)
+        {
+            if (await FavoriteExists(favoriteRequest.UserId, favoriteRequest.MovieId) == false)
+            {
+                throw new Exception("You didn't add this movie to favorite list yet!");
+            }
+
+            var dbFavorite = new Favorite
+            {
+                UserId = favoriteRequest.UserId,
+                MovieId = favoriteRequest.MovieId
+            };
+
+            var removedFavorite = await _userRepository.RemoveFavorite(dbFavorite);
+            if (removedFavorite)
             {
                 return true;
             }

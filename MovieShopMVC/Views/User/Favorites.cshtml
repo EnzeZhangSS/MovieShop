@@ -1,1 +1,101 @@
-﻿
+﻿@using ApplicationCore.Models
+@model PagedResultSet<MovieCardModel>
+@using MovieShopMVC.Infra
+@inject ICurrentUser currentUser
+@using ApplicationCore.Contracts.Services
+@inject IUserService userService
+
+
+<div class="rounded">
+	<div class="container-fluid">
+		<div class="row">
+			@foreach (var movieCard in Model?.Data)
+			{
+				<div class="col-xl-2 col-sm-4 col-lg-3 col-6">
+
+					<partial name="_MovieCard" model="@movieCard" />
+
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+@{
+	var firstDisabled = !Model.HasPreviousPage ? "disabled" : "";
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+	var lastDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="mt-5">
+
+	<a asp-action="Favorites" asp-route-page="1" class="btn btn-outline-primary @firstDisabled"> << </a>
+	<a asp-action="Favorites" asp-route-page="@(Model.PageIndex-1)" class="btn btn-outline-primary @prevDisabled"> < </a>
+
+
+	@if (Model.TotalPages <= 5)
+	{
+		@for (var i = 1; i <= Model.TotalPages; i++)
+		{
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
+		}
+	}
+	else if (Model.PageIndex <= 3)
+	{
+		@for (var i = 1; i <= 5; i++)
+		{
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
+		}
+		<a class="btn btn-outline-primary disabled"> ... </a>
+	}
+	else if (Model.PageIndex >= (Model.TotalPages - 2))
+	{
+		<a class="btn btn-outline-primary disabled"> ... </a>
+		@for (var i = Model.TotalPages - 4; i <= Model.TotalPages; i++)
+		{
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
+		}
+	}
+	else
+	{
+		<a class="btn btn-outline-primary disabled"> ... </a>
+		@for (var i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
+		{
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="Favorites" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
+		}
+		<a class="btn btn-outline-primary disabled"> ... </a>
+	}
+
+	<a asp-action="Favorites" asp-route-page="@(Model.PageIndex+1)" class="btn btn-outline-primary @nextDisabled"> > </a>
+	<a asp-action="Favorites" asp-route-page="@(Model.TotalPages)" class="btn btn-outline-primary @lastDisabled"> >> </a>
+
+</div>

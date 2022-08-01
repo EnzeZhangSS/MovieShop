@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace ApplicationCore.Contracts.Repository
         Task<Review> GetReviewById(int userId, int movieId);
         Task<Favorite> AddFavorite(Favorite favorite);
         Task<Favorite> GetFavoriteById(int userId, int movieId);
+        Task<bool> RemoveFavorite(Favorite favorite);
+        Task<PagedResultSet<Movie>> GetAllFavoritesPagination(int userid, int pageSize = 30, int page = 1);
 
     }
 }

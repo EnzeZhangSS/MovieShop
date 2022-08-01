@@ -42,13 +42,16 @@ namespace MovieShopMVC.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Favorites()
+        public async Task<IActionResult> Favorites(int pageSize = 30, int page = 1)
         {
             if (_currentUser.IsAuthenticated == false)
             {
                 return LocalRedirect("~/Account/Login");
             }
-            return View();
+            var userId = _currentUser.UserId;
+            var pagedMovies = await _userService.GetAllFavoritesForUser(userId, pageSize, page);
+            ViewData["Title"] = "Favorites";
+            return View(pagedMovies);
         }
 
         [HttpGet]
@@ -95,14 +98,45 @@ namespace MovieShopMVC.Controllers
             return RedirectToAction("Details", "Movies", new { id = movieId});
         }
 
-        [HttpPost]
-        public async Task<IActionResult> FavoriteMovie()
+        [HttpGet]
+        public IActionResult FavoriteMovie(int movieId)
         {
             if (_currentUser.IsAuthenticated == false)
             {
                 return LocalRedirect("~/Account/Login");
             }
-            return View();
+            return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FavoriteMovie(int movieId, int userId, int actionId)
+        {
+            if (_currentUser.IsAuthenticated == false)
+            {
+                return LocalRedirect("~/Account/Login");
+            }
+
+            if(actionId == 1)
+            {
+                UserFavoriteRequestModel favorite = new UserFavoriteRequestModel
+                {
+                    UserId = _currentUser.UserId,
+                    MovieId = movieId
+                };
+                var favoriteAddSuccess = await _userService.AddFavorite(favorite);
+            }
+            else if(actionId == 0)
+            {
+                UserFavoriteRequestModel favorite = new UserFavoriteRequestModel
+                {
+                    UserId = _currentUser.UserId,
+                    MovieId = movieId
+                };
+
+                var favoriteRemoveSuccess = await _userService.RemoveFavorite(favorite);
+            }
+            
+            return RedirectToAction("Details", "Movies", new { id = movieId });
         }
     }
 }

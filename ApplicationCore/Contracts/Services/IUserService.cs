@@ -13,12 +13,13 @@ namespace ApplicationCore.Contracts.Services
         Task<bool> IsMoviePurchased(int userId, int movieId);
         Task<PagedResultSet<MovieCardModel>> GetAllPurchasesForUser(int userid, int pageSize = 30, int page = 1);
         Task<PurchaseDetailsModel> GetPurchasesDetails(int userId, int movieId);
+        Task<bool> AddFavorite(UserFavoriteRequestModel favoriteRequest);
+        Task<bool> RemoveFavorite(UserFavoriteRequestModel favoriteRequest);
+        Task<bool> FavoriteExists(int userid, int movieId);
+        Task<PagedResultSet<MovieCardModel>> GetAllFavoritesForUser(int userid, int pageSize = 30, int page = 1);
+
 
         /*
-        Task AddFavorite(UserFavoriteRequestModel favoriteRequest);
-        Task RemoveFavorite(UserFavoriteRequestModel favoriteRequest);
-        Task FavoriteExists(int id, int movieId);
-        Task GetAllFavoritesForUser(int id);
         Task AddMovieReview(UserReviewRequestModel reviewRequest);
         Task UpdateMovieReview(UserReviewRequestModel reviewRequest);
         Task DeleteMovieReview(int userId, int movieId);

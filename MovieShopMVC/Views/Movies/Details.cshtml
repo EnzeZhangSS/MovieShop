@@ -36,7 +36,7 @@
 						<div class="pb-3">
 							<button type="button" class="btn btn-outline-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#ReviewModal"><i class="bi bi-pencil-square"></i> REVIEW</button>
 						</div>
-						<div>
+						<div class="pb-3">
 							@if (currentUser.IsAuthenticated)
 							{
 								@if (await userService.IsMoviePurchased(currentUser.UserId, Model.Id))
@@ -52,6 +52,30 @@
 							{
 								<button type="button" class="btn btn-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#BuyModal">BUY $@Model.Price</button>
 							}
+						</div>
+						<div>
+							@if (currentUser.IsAuthenticated)
+							{
+								@if (await userService.FavoriteExists(currentUser.UserId, Model.Id))
+								{
+									<form asp-controller="User" asp-action="FavoriteMovie" asp-route-movieId="@Model.Id" asp-route-actionId="0">
+										<button type="submit" class="btn btn-danger" style="width:60%">FAVORITE <i class="bi bi-heart"></i></button>
+									</form>
+								}
+								else
+								{
+									<form asp-controller="User" asp-action="FavoriteMovie" asp-route-movieId="@Model.Id" asp-route-actionId="1">
+										<button type="submit" class="btn btn-outline-danger" style="width:60%">FAVORITE <i class="bi bi-heart"></i></button>
+									</form>
+								}
+							}
+							else
+							{
+								<a asp-controller="Account" asp-action="Login">
+									<button type="button" class="btn btn-outline-danger" style="width:60%">FAVORITE <i class="bi bi-heart"></i></button>
+								</a>
+							}
+
 						</div>
 					</div>
 				</div>
