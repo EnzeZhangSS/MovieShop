@@ -20,7 +20,12 @@ namespace ApplicationCore.Contracts.Repository
         Task<Favorite> AddFavorite(Favorite favorite);
         Task<Favorite> GetFavoriteById(int userId, int movieId);
         Task<bool> RemoveFavorite(Favorite favorite);
+        Task<bool> DeleteReview(int userId, int movieId);
+        Task<bool> UpdateReview(Review review);
         Task<PagedResultSet<Movie>> GetAllFavoritesPagination(int userid, int pageSize = 30, int page = 1);
+        Task<List<Review>> GetAllReviews(int userid);
+
+
 
     }
 }

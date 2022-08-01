@@ -120,5 +120,40 @@ namespace Infrastructure.Repository
             var pagedMovies = new PagedResultSet<Movie>(movies, page, pageSize, totalFavoritesOfUser);
             return pagedMovies;
         }
+
+        public async Task<bool> DeleteReview(int userId, int movieId)
+        {
+            var RevToBeRemoved = await _movieShopDbContext.Reviews
+                .FirstOrDefaultAsync(r => r.UserId == userId && r.MovieId == movieId);
+            if (RevToBeRemoved == null)
+            {
+                throw new Exception("You didn't write a review for this movie yet!");
+                return false;
+            }
+
+            _movieShopDbContext.Reviews.Remove(RevToBeRemoved);
+            await _movieShopDbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UpdateReview(Review review)
+        {
+            _movieShopDbContext.Reviews.Update(review);
+            await _movieShopDbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<Review>> GetAllReviews(int userid)
+        {
+            var totalReviewsOfUser = await _movieShopDbContext.Reviews.Where(r => r.UserId == userid).CountAsync();
+            if (totalReviewsOfUser == 0)
+            {
+                throw new Exception("You didn't have any review yet.");
+            }
+
+            var reviews = await _movieShopDbContext.Reviews.ToListAsync();
+
+            return reviews;
+        }
     }
 }

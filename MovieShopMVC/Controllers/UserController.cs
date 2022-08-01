@@ -11,11 +11,14 @@ namespace MovieShopMVC.Controllers
     {
         private readonly ICurrentUser _currentUser;
         private readonly IUserService _userService;
+        private readonly IMovieService _movieService;
 
-        public UserController(ICurrentUser currentUser, IUserService userService)
+
+        public UserController(ICurrentUser currentUser, IUserService userService, IMovieService movieService)
         {
             _currentUser = currentUser;
             _userService = userService;
+            _movieService = movieService;
         }
 
         [HttpGet]
@@ -36,7 +39,7 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> PurchaseDetails(int userId, int movieId)
         {
-            var purchaseDetails = await _userService.GetPurchasesDetails(userId,movieId);
+            var purchaseDetails = await _userService.GetPurchasesDetails(userId, movieId);
             return View(purchaseDetails);
         }
 
@@ -67,9 +70,10 @@ namespace MovieShopMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(UserEditModel model)
         {
+
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult BuyMovie(int movieId)
         {
@@ -79,7 +83,7 @@ namespace MovieShopMVC.Controllers
             }
             return RedirectToAction("Details", "Movies", new { id = movieId });
         }
-        
+
 
         [HttpPost]
         public async Task<IActionResult> BuyMovie(int movieId, int userId)
@@ -95,7 +99,7 @@ namespace MovieShopMVC.Controllers
                 MovieId = movieId
             };
             var purchaseSuccess = await _userService.PurchaseMovie(purchase, _currentUser.UserId);
-            return RedirectToAction("Details", "Movies", new { id = movieId});
+            return RedirectToAction("Details", "Movies", new { id = movieId });
         }
 
         [HttpGet]
@@ -116,7 +120,7 @@ namespace MovieShopMVC.Controllers
                 return LocalRedirect("~/Account/Login");
             }
 
-            if(actionId == 1)
+            if (actionId == 1)
             {
                 UserFavoriteRequestModel favorite = new UserFavoriteRequestModel
                 {
@@ -125,7 +129,7 @@ namespace MovieShopMVC.Controllers
                 };
                 var favoriteAddSuccess = await _userService.AddFavorite(favorite);
             }
-            else if(actionId == 0)
+            else if (actionId == 0)
             {
                 UserFavoriteRequestModel favorite = new UserFavoriteRequestModel
                 {
@@ -135,8 +139,65 @@ namespace MovieShopMVC.Controllers
 
                 var favoriteRemoveSuccess = await _userService.RemoveFavorite(favorite);
             }
-            
+
             return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
+        [HttpGet]
+        public IActionResult ReviewMovie(int movieId)
+        {
+            
+            if (_currentUser.IsAuthenticated == false)
+            {
+                return LocalRedirect("~/Account/Login");
+            }
+            //return RedirectToAction("Details", "Movies", new { id = movieId });
+            ViewData["Title"] = "Review" + _movieService.GetMovieDetails(movieId).Result.Title;
+            UserReviewRequestModel review = new UserReviewRequestModel
+            {
+                MovieId = movieId,
+                UserId = _currentUser.UserId
+            };
+            return View(review);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ReviewMovie(UserReviewRequestModel model,int movieId ,int actionId)
+        {
+            if (_currentUser.IsAuthenticated == false)
+            {
+                return LocalRedirect("~/Account/Login");
+            }
+            UserReviewRequestModel review = new UserReviewRequestModel
+            {
+                MovieId = movieId,
+                UserId = _currentUser.UserId,
+                Rating = model.Rating,
+                ReviewText = model.ReviewText
+            };
+            
+
+            if (actionId == 1)
+            {
+                if (await _userService.ReviewExists(_currentUser.UserId, review.MovieId))
+                {
+                    var reviewUpdateSuccess = await _userService.UpdateMovieReview(review);
+                }
+                else
+                {
+                    var reviewAddSuccess = await _userService.AddMovieReview(review);
+                }
+
+            }
+            else if (actionId == 0)
+            {
+
+                var reviewDeleteSuccess = await _userService.DeleteMovieReview(_currentUser.UserId, review.MovieId);
+            }
+
+
+
+            return RedirectToAction("Details", "Movies", new { id = review.MovieId });
         }
     }
 }

@@ -43,6 +43,37 @@ namespace Infrastructure.Services
             return false;
         }
 
+        public async Task<bool> AddMovieReview(UserReviewRequestModel reviewRequest)
+        {
+
+            var dbReview = new Review
+            {
+                UserId = reviewRequest.UserId,
+                MovieId = reviewRequest.MovieId,
+                Rating = reviewRequest.Rating,
+                ReviewText = reviewRequest.ReviewText,
+                CreatedDate = reviewRequest.CreatedDate
+            };
+            
+            var savedReview = await _userRepository.AddReview(dbReview);
+            if (savedReview.UserId > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteMovieReview(int userId, int movieId)
+        {
+            
+            var deletedReview = await _userRepository.DeleteReview(userId,movieId);
+            if (deletedReview)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public async Task<bool> FavoriteExists(int userid, int movieId)
         {
             var favorite = await _userRepository.GetFavoriteById(userid, movieId);
@@ -82,6 +113,21 @@ namespace Infrastructure.Services
 
             return new PagedResultSet<MovieCardModel>(movieCards, page, pageSize, movies.TotalRowCount);
         }
+
+        public async Task<List<ReviewDetailsModel>> GetAllReviewsByUser(int userId)
+        {
+            var reviews = await _userRepository.GetAllReviews(userId);
+            var reviewDetails = reviews.Select(r => new ReviewDetailsModel
+            {
+                MovieId = r.MovieId,
+                UserId = userId,
+                Rating = r.Rating,
+                ReviewText = r.ReviewText,
+                CreatedDate = r.CreatedDate
+            }).ToList();
+            return reviewDetails;
+        }
+
 
         public async Task<PurchaseDetailsModel> GetPurchasesDetails(int userId, int movieId)
         {
@@ -147,6 +193,35 @@ namespace Infrastructure.Services
 
             var removedFavorite = await _userRepository.RemoveFavorite(dbFavorite);
             if (removedFavorite)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> ReviewExists(int userId, int movieId)
+        {
+            var review = await _userRepository.GetReviewById(userId, movieId);
+            if (review == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> UpdateMovieReview(UserReviewRequestModel reviewRequest)
+        {
+            var dbReview = new Review
+            {
+                UserId = reviewRequest.UserId,
+                MovieId = reviewRequest.MovieId,
+                Rating = reviewRequest.Rating,
+                ReviewText = reviewRequest.ReviewText,
+                CreatedDate = reviewRequest.CreatedDate
+            };
+
+            var savedReview = await _userRepository.UpdateReview(dbReview);
+            if (savedReview)
             {
                 return true;
             }

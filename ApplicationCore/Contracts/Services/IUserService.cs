@@ -17,13 +17,11 @@ namespace ApplicationCore.Contracts.Services
         Task<bool> RemoveFavorite(UserFavoriteRequestModel favoriteRequest);
         Task<bool> FavoriteExists(int userid, int movieId);
         Task<PagedResultSet<MovieCardModel>> GetAllFavoritesForUser(int userid, int pageSize = 30, int page = 1);
+        Task<bool> AddMovieReview(UserReviewRequestModel reviewRequest);
+        Task<bool> UpdateMovieReview(UserReviewRequestModel reviewRequest);
+        Task<bool> DeleteMovieReview(int userId, int movieId);
+        Task<List<ReviewDetailsModel>> GetAllReviewsByUser(int userId);
+        Task<bool> ReviewExists(int userId, int movieId);
 
-
-        /*
-        Task AddMovieReview(UserReviewRequestModel reviewRequest);
-        Task UpdateMovieReview(UserReviewRequestModel reviewRequest);
-        Task DeleteMovieReview(int userId, int movieId);
-        Task GetAllReviewsByUser(int id);
-        */
     }
 }

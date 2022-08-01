@@ -1,0 +1,62 @@
+﻿@model ApplicationCore.Models.UserReviewRequestModel
+@using ApplicationCore.Contracts.Services
+@inject IMovieService movieService
+
+@{
+	var MovieID = @Model.MovieId;
+}}
+
+<div class="container-fluid">
+	<div class="row mt-5">
+		<div class="col-8 offset-2 shadow p-3 mb-5 rounded">
+			<h3>Review Details</h3>
+			<hr />
+			<div class="row">
+
+				<div class="col-4">
+					<img src="@movieService.GetMovieDetails(@MovieID).Result.PosterUrl" style="width:100%" />
+				</div>
+
+				<div class="col-7">
+					<form asp-action="ReviewMovie" asp-route-movieId="@MovieID">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group py-2">
+							<label asp-for="Rating" class="control-label">Rating</label>
+							<select class="form-select" aria-label="Rating" asp-for="Rating">
+								<option selected>Select Rating...</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</div>
+						<div class="form-group form-floating py-2">
+							<label asp-for="ReviewText" class="control-label">Review</label>
+							<textarea class="form-control" placeholder="Leave a review here" asp-for="ReviewText"></textarea>
+						</div>
+
+						<div class="form-group py-2">
+							<button type="submit" class="btn btn-danger" asp-route-actionId="0">Delete</button>
+							<button type="button" class="btn btn-secondary" asp-controller="Movies" asp-action="Details" asp-route-id="@MovieID">Cancel</button>
+							<button type="submit" class="btn btn-primary" asp-route-actionId="1">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}
