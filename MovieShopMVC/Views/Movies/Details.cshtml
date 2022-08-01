@@ -37,9 +37,16 @@
 							<button type="button" class="btn btn-outline-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#ReviewModal"><i class="bi bi-pencil-square"></i> REVIEW</button>
 						</div>
 						<div>
-							@if (await userService.IsMoviePurchased(currentUser.UserId, Model.Id))
+							@if (currentUser.IsAuthenticated)
 							{
-								<a href="@Model.TmdbUrl" target="_blank"><button type="button" class="btn btn-light" style="width:60%" >WATCH MOVIE</button></a>
+								@if (await userService.IsMoviePurchased(currentUser.UserId, Model.Id))
+								{
+									<a href="@Model.TmdbUrl" target="_blank"><button type="button" class="btn btn-light" style="width:60%">WATCH MOVIE</button></a>
+								}
+								else
+								{
+									<button type="button" class="btn btn-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#BuyModal">BUY $@Model.Price</button>
+								}
 							}
 							else
 							{

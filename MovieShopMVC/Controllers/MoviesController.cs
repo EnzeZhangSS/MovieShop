@@ -10,15 +10,13 @@ namespace MovieShopMVC.Controllers
     {
         private readonly IMovieService _movieService;
         private readonly IGenreRepository _genreRepository;
-        private readonly ICurrentUser _currentUser;
-        private readonly IUserService _userService;
 
-        public MoviesController(IMovieService movieService, IGenreRepository genreRepository, ICurrentUser currentUser, IUserService userService)
+
+        public MoviesController(IMovieService movieService, IGenreRepository genreRepository)
         {
             _movieService = movieService;
             _genreRepository = genreRepository;
-            _currentUser = currentUser;
-            _userService = userService;
+
         }
 
         [HttpGet]
