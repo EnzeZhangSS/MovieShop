@@ -59,6 +59,41 @@ namespace Infrastructure.Services
                 movieDetailsModel.Genres.Add(new GenreModel { Id = genre.GenreId, Name = genre.Genre.Name });
             }
 
+            
+
+            foreach (var purchase in movieDetails.PurchasesOfMovie)
+            {
+                movieDetailsModel.Purchases.Add(new PurchaseDetailsModel
+                {
+                    MovieId = purchase.MovieId,
+                    UserId = purchase.UserId,
+                    PurchaseDateTime = purchase.PurchaseDateTime,
+                    PurchaseNumber = purchase.PurchaseNumber,
+                    TotalPrice = purchase.TotalPrice
+                });
+            }
+
+            foreach (var review in movieDetails.ReviewsOfMovie)
+            {
+                movieDetailsModel.Reviews.Add(new ReviewDetailsModel
+                {
+                    MovieId = review.MovieId,
+                    UserId = review.UserId,
+                    Rating = review.Rating,
+                    ReviewText = review.ReviewText,
+                    CreatedDate = review.CreatedDate
+                });
+            }
+
+            foreach (var favorite in movieDetails.FavoritesOfMovie)
+            {
+                movieDetailsModel.Favorites.Add(new UserFavoriteRequestModel
+                {
+                    MovieId = favorite.MovieId,
+                    UserId = favorite.UserId
+                });
+            }
+
             return movieDetailsModel;
         }
 

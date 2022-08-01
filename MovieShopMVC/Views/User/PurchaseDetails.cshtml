@@ -1,0 +1,39 @@
+﻿@model ApplicationCore.Models.PurchaseDetailsModel
+@using ApplicationCore.Contracts.Services
+@inject IMovieService movieService
+
+@{
+	ViewData["Title"] = "Purchase Details";
+}
+
+<div class="container-fluid">
+	<div class="row mt-5">
+		<div class="col-8 offset-2 shadow p-3 mb-5 rounded">
+			<h3>Purchase Details</h3>
+			<hr />
+			<div class="row">
+				<div class="col-4">
+					<img src="@movieService.GetMovieDetails(Model.MovieId).Result.PosterUrl" style="width:100%" />
+				</div>
+				<div class="col-7">
+					<ul class="list-group list-group-flush mt-2">
+						<li class="list-group-item">
+							<i class="bi bi-calendar-week"></i> Purchased Date
+							<span class="badge rounded-pill bg-dark">@Model.PurchaseDateTime.Date.ToString("d")</span>
+						</li>
+						<li class="list-group-item">
+							<i class="bi bi-cash"></i> Price
+							<span class="badge rounded-pill bg-dark">@Model.TotalPrice</span>
+						</li>
+						<li class="list-group-item">
+							<i class="bi bi-check-circle-fill"></i> Purchase Number
+							<span class="badge rounded-pill bg-dark">@Model.PurchaseNumber</span>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -22,71 +22,74 @@
 	var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 	var lastDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+<div class="mt-5">
 
-<a asp-action="GenreMovies" asp-route-page="1" class="btn btn-outline-primary @firstDisabled"> << </a>
-<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex-1)" class="btn btn-outline-primary @prevDisabled"> < </a>
+	<a asp-action="GenreMovies" asp-route-page="1" class="btn btn-outline-primary @firstDisabled"> << </a>
+	<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex-1)" class="btn btn-outline-primary @prevDisabled"> < </a>
 
 
-@if (Model.TotalPages <= 5)
-{
-	@for (var i = 1; i <= Model.TotalPages; i++)
+	@if (Model.TotalPages <= 5)
 	{
-		@if (i == Model.PageIndex)
+		@for (var i = 1; i <= Model.TotalPages; i++)
 		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
-		}
-		else
-		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
 		}
 	}
-}
-else if (Model.PageIndex <= 3)
-{
-	@for (var i = 1; i <= 5; i++)
+	else if (Model.PageIndex <= 3)
 	{
-		@if (i == Model.PageIndex)
+		@for (var i = 1; i <= 5; i++)
 		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
 		}
-		else
+		<a class="btn btn-outline-primary disabled"> ... </a>
+	}
+	else if (Model.PageIndex >= (Model.TotalPages - 2))
+	{
+		<a class="btn btn-outline-primary disabled"> ... </a>
+		@for (var i = Model.TotalPages - 4; i <= Model.TotalPages; i++)
 		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
 		}
 	}
-	<a class="btn btn-outline-primary disabled"> ... </a>
-}
-else if (Model.PageIndex >= (Model.TotalPages - 2))
-{
-	<a class="btn btn-outline-primary disabled"> ... </a>
-	@for (var i = Model.TotalPages - 4; i <= Model.TotalPages; i++)
+	else
 	{
-		@if (i == Model.PageIndex)
+		<a class="btn btn-outline-primary disabled"> ... </a>
+		@for (var i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
 		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			@if (i == Model.PageIndex)
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
+			}
+			else
+			{
+				<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
+			}
 		}
-		else
-		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
-		}
+		<a class="btn btn-outline-primary disabled"> ... </a>
 	}
-}
-else
-{
-	<a class="btn btn-outline-primary disabled"> ... </a>
-	@for (var i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
-	{
-		@if (i == Model.PageIndex)
-		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary active"> @i </a>
-		}
-		else
-		{
-			<a asp-action="GenreMovies" asp-route-page="@i" class="btn btn-outline-primary"> @i </a>
-		}
-	}
-	<a class="btn btn-outline-primary disabled"> ... </a>
-}
 
-<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex+1)" class="btn btn-outline-primary @nextDisabled"> > </a>
-<a asp-action="GenreMovies" asp-route-page="@(Model.TotalPages)" class="btn btn-outline-primary @lastDisabled"> >> </a>
+	<a asp-action="GenreMovies" asp-route-page="@(Model.PageIndex+1)" class="btn btn-outline-primary @nextDisabled"> > </a>
+	<a asp-action="GenreMovies" asp-route-page="@(Model.TotalPages)" class="btn btn-outline-primary @lastDisabled"> >> </a>
+
+</div>

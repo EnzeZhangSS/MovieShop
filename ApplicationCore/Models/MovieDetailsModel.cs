@@ -13,6 +13,9 @@ namespace ApplicationCore.Models
             Genres = new List<GenreModel>();
             Trailers = new List<TrailerModel>();
             Casts = new List<CastModel>();
+            Purchases = new List<PurchaseDetailsModel>();
+            Reviews = new List<ReviewDetailsModel>();
+            Favorites = new List<UserFavoriteRequestModel>();
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -32,5 +35,10 @@ namespace ApplicationCore.Models
         public List<GenreModel> Genres { get; set; }
         public List<TrailerModel> Trailers { get; set; }
         public List<CastModel> Casts { get; set; }
+
+        public List<PurchaseDetailsModel> Purchases { get; set; }
+        public List<ReviewDetailsModel> Reviews { get; set; }
+        public List<UserFavoriteRequestModel> Favorites { get; set; }
+
     }
 }

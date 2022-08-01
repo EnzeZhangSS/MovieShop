@@ -25,6 +25,9 @@ namespace Infrastructure.Repository
                 .Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre)
                 .Include(m => m.CastsOfMovie).ThenInclude(m => m.Cast)
                 .Include(m => m.Trailers)
+                .Include(m => m.PurchasesOfMovie)
+                .Include(m => m.ReviewsOfMovie)
+                .Include(m => m.FavoritesOfMovie)
                 .FirstOrDefaultAsync(m => m.Id == id);
             return movieDetails;
         }

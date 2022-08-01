@@ -1,4 +1,8 @@
 ﻿@model ApplicationCore.Models.MovieDetailsModel
+@using MovieShopMVC.Infra
+@inject ICurrentUser currentUser
+@using ApplicationCore.Contracts.Services
+@inject IUserService userService
 
 
 @{
@@ -33,7 +37,14 @@
 							<button type="button" class="btn btn-outline-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#ReviewModal"><i class="bi bi-pencil-square"></i> REVIEW</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#BuyModal">BUY $@Model.Price</button>
+							@if (await userService.IsMoviePurchased(currentUser.UserId, Model.Id))
+							{
+								<a href="@Model.TmdbUrl" target="_blank"><button type="button" class="btn btn-light" style="width:60%" >WATCH MOVIE</button></a>
+							}
+							else
+							{
+								<button type="button" class="btn btn-light" style="width:60%" data-bs-toggle="modal" data-bs-target="#BuyModal">BUY $@Model.Price</button>
+							}
 						</div>
 					</div>
 				</div>
@@ -122,7 +133,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary">Purchase</button>
+				<form asp-controller="User" asp-action="BuyMovie" asp-route-movieId="@Model.Id">
+					<button type="submit" class="btn btn-primary">Purchase</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -162,3 +175,10 @@
 		</div>
 	</div>
 </div>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}
