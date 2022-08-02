@@ -61,7 +61,7 @@ namespace Infrastructure.Data
             builder.ToTable("Reviews");
             builder.HasKey(r => new { r.UserId, r.MovieId });
             builder.Property(r => r.ReviewText).HasMaxLength(20000);
-            builder.Property(r => r.Rating).HasColumnType("decimal(3, 2)");
+            builder.Property(r => r.Rating).HasColumnType("decimal(4, 2)");
             builder.Property(r => r.CreatedDate).HasDefaultValueSql("getdate()");
         }
 

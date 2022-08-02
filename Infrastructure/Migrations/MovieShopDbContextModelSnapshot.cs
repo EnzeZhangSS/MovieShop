@@ -258,7 +258,7 @@ namespace Infrastructure.Migrations
                         .HasDefaultValueSql("getdate()");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(3,2)");
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<string>("ReviewText")
                         .IsRequired()

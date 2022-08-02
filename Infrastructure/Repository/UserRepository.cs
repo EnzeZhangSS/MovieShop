@@ -138,7 +138,18 @@ namespace Infrastructure.Repository
 
         public async Task<bool> UpdateReview(Review review)
         {
-            _movieShopDbContext.Reviews.Update(review);
+            var RevToBeUpdated = await _movieShopDbContext.Reviews
+                .FirstOrDefaultAsync(r => r.UserId == review.UserId && r.MovieId == review.MovieId);
+            if (RevToBeUpdated == null)
+            {
+                throw new Exception("You didn't write a review for this movie yet!");
+                return false;
+            }
+            RevToBeUpdated.ReviewText = review.ReviewText;
+            RevToBeUpdated.Rating = review.Rating;
+            RevToBeUpdated.CreatedDate = review.CreatedDate;
+
+            _movieShopDbContext.Reviews.Update(RevToBeUpdated);
             await _movieShopDbContext.SaveChangesAsync();
             return true;
         }

@@ -152,11 +152,16 @@ namespace MovieShopMVC.Controllers
             }
             //return RedirectToAction("Details", "Movies", new { id = movieId });
             ViewData["Title"] = "Review" + _movieService.GetMovieDetails(movieId).Result.Title;
-            UserReviewRequestModel review = new UserReviewRequestModel
+            ReviewDetailsModel review = new ReviewDetailsModel
             {
                 MovieId = movieId,
                 UserId = _currentUser.UserId
             };
+            if (_userService.ReviewExists(_currentUser.UserId, movieId).Result)
+            {
+                review = _userService.GetReviewDetails(_currentUser.UserId, movieId).Result;
+            }
+          
             return View(review);
         }
 

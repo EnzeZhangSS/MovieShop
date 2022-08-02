@@ -144,6 +144,20 @@ namespace Infrastructure.Services
             
         }
 
+        public async Task<ReviewDetailsModel> GetReviewDetails(int userId, int movieId)
+        {
+            var reviewDetails = await _userRepository.GetReviewById(userId, movieId);
+            var reviewDetailsModel = new ReviewDetailsModel
+            {
+                UserId = reviewDetails.UserId,
+                MovieId = reviewDetails.MovieId,
+                Rating = reviewDetails.Rating,
+                ReviewText=reviewDetails.ReviewText,
+                CreatedDate=reviewDetails.CreatedDate
+            };
+            return reviewDetailsModel;
+        }
+
         public async Task<bool> IsMoviePurchased(int userId, int movieId)
         {
             var purchase = await _userRepository.GetPurchaseById(userId, movieId);
