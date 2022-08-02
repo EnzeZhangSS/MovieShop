@@ -3,6 +3,7 @@ using ApplicationCore.Models;
 using Microsoft.AspNetCore.Authorization;
 using MovieShopMVC.Infra;
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Contracts.Repository;
 
 namespace MovieShopMVC.Controllers
 {
@@ -12,13 +13,15 @@ namespace MovieShopMVC.Controllers
         private readonly ICurrentUser _currentUser;
         private readonly IUserService _userService;
         private readonly IMovieService _movieService;
+        private readonly IUserRepository _userRepository;
 
 
-        public UserController(ICurrentUser currentUser, IUserService userService, IMovieService movieService)
+        public UserController(ICurrentUser currentUser, IUserService userService, IMovieService movieService, IUserRepository userRepository)
         {
             _currentUser = currentUser;
             _userService = userService;
             _movieService = movieService;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -60,18 +63,45 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
+
             if (_currentUser.IsAuthenticated == false)
             {
                 return LocalRedirect("~/Account/Login");
             }
-            return View();
+
+            var getPro = await _userRepository.GetById(_currentUser.UserId);
+            UserEditModel editPro = new UserEditModel
+            {
+                FirstName = getPro.FirstName,
+                LastName = getPro.LastName,
+                Email = getPro.Email,
+                DateOfBirth = (DateTime)getPro.DateOfBirth
+            };
+
+
+            return View(editPro);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditProfile(UserEditModel model)
         {
 
-            return View();
+            if (_currentUser.IsAuthenticated == false)
+            {
+                return LocalRedirect("~/Account/Login");
+            }
+            UserEditModel editPro = new UserEditModel
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = model.Password,
+                DateOfBirth = model.DateOfBirth
+            };
+
+            var profileUpdateSuccess = await _userService.EditProfile(editPro, _currentUser.UserId);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

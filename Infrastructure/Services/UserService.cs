@@ -2,6 +2,7 @@
 using ApplicationCore.Contracts.Services;
 using ApplicationCore.Entities;
 using ApplicationCore.Models;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Infrastructure.Services
                 ReviewText = reviewRequest.ReviewText,
                 CreatedDate = reviewRequest.CreatedDate
             };
-            
+
             var savedReview = await _userRepository.AddReview(dbReview);
             if (savedReview.UserId > 0)
             {
@@ -65,13 +66,43 @@ namespace Infrastructure.Services
 
         public async Task<bool> DeleteMovieReview(int userId, int movieId)
         {
-            
-            var deletedReview = await _userRepository.DeleteReview(userId,movieId);
+
+            var deletedReview = await _userRepository.DeleteReview(userId, movieId);
             if (deletedReview)
             {
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> EditProfile(UserEditModel editProfileRequest, int userId)
+        {
+            var dbUser = new User
+            {
+                Id = userId,
+                FirstName = editProfileRequest.FirstName,
+                LastName = editProfileRequest.LastName,
+                Email = editProfileRequest.Email,
+                DateOfBirth = editProfileRequest.DateOfBirth,
+                HashedPassword = GetHashedPasswordWithSalt(editProfileRequest.Password, _userRepository.GetById(userId).Result.Salt)
+            };
+
+            var savedUser = await _userRepository.EditUserProfile(dbUser);
+            if (savedUser)
+            {
+                return true;
+            }
+            return false;
+        }
+        private string GetHashedPasswordWithSalt(string password, string salt)
+        {
+            var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password,
+            Convert.FromBase64String(salt),
+            KeyDerivationPrf.HMACSHA512,
+            10000,
+            256 / 8));
+            return hashed;
         }
 
         public async Task<bool> FavoriteExists(int userid, int movieId)
@@ -131,7 +162,7 @@ namespace Infrastructure.Services
 
         public async Task<PurchaseDetailsModel> GetPurchasesDetails(int userId, int movieId)
         {
-            var purchaseDetails = await _userRepository.GetPurchaseById(userId,movieId);
+            var purchaseDetails = await _userRepository.GetPurchaseById(userId, movieId);
             var purchaseDetailsModel = new PurchaseDetailsModel
             {
                 UserId = purchaseDetails.UserId,
@@ -141,7 +172,7 @@ namespace Infrastructure.Services
                 TotalPrice = purchaseDetails.TotalPrice
             };
             return purchaseDetailsModel;
-            
+
         }
 
         public async Task<ReviewDetailsModel> GetReviewDetails(int userId, int movieId)
@@ -152,8 +183,8 @@ namespace Infrastructure.Services
                 UserId = reviewDetails.UserId,
                 MovieId = reviewDetails.MovieId,
                 Rating = reviewDetails.Rating,
-                ReviewText=reviewDetails.ReviewText,
-                CreatedDate=reviewDetails.CreatedDate
+                ReviewText = reviewDetails.ReviewText,
+                CreatedDate = reviewDetails.CreatedDate
             };
             return reviewDetailsModel;
         }

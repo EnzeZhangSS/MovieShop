@@ -23,6 +23,7 @@ namespace ApplicationCore.Contracts.Services
         Task<List<ReviewDetailsModel>> GetAllReviewsByUser(int userId);
         Task<bool> ReviewExists(int userId, int movieId);
         Task<ReviewDetailsModel> GetReviewDetails(int userId, int movieId);
+        Task<bool> EditProfile(UserEditModel editProfileRequest, int userId);
 
     }
 }

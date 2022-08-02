@@ -24,7 +24,7 @@ namespace ApplicationCore.Contracts.Repository
         Task<bool> UpdateReview(Review review);
         Task<PagedResultSet<Movie>> GetAllFavoritesPagination(int userid, int pageSize = 30, int page = 1);
         Task<List<Review>> GetAllReviews(int userid);
-
+        Task<bool> EditUserProfile(User editProfile);
 
 
     }

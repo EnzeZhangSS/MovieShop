@@ -48,6 +48,7 @@ namespace Infrastructure.Repository
             return user;
         }
 
+
         public async Task<User> GetById(int id)
         {
             var userDetails = await _movieShopDbContext.Users
@@ -89,7 +90,7 @@ namespace Infrastructure.Repository
         {
             var FavToBeRemoved = await _movieShopDbContext.Favorites
                 .FirstOrDefaultAsync(f => f.UserId == favorite.UserId && f.MovieId == favorite.MovieId);
-            if(FavToBeRemoved == null)
+            if (FavToBeRemoved == null)
             {
                 throw new Exception("You didn't add this movie to favorite list yet!");
                 return false;
@@ -165,6 +166,27 @@ namespace Infrastructure.Repository
             var reviews = await _movieShopDbContext.Reviews.ToListAsync();
 
             return reviews;
+        }
+
+        public async Task<bool> EditUserProfile(User editProfile)
+        {
+            var ProToBeUpdated = await GetById(editProfile.Id);
+
+            if (ProToBeUpdated == null)
+            {
+                throw new Exception("You didn't register yet!");
+                return false;
+            }
+
+            ProToBeUpdated.FirstName = editProfile.FirstName;
+            ProToBeUpdated.LastName = editProfile.LastName;
+            ProToBeUpdated.Email = editProfile.Email;
+            ProToBeUpdated.HashedPassword = editProfile.HashedPassword;
+            ProToBeUpdated.DateOfBirth = editProfile.DateOfBirth;
+
+            _movieShopDbContext.Users.Update(ProToBeUpdated);
+            await _movieShopDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }
