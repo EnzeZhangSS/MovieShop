@@ -29,6 +29,20 @@ namespace Infrastructure.Repository
                 .Include(m => m.ReviewsOfMovie)
                 .Include(m => m.FavoritesOfMovie)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            if(movieDetails == null)
+            {
+                return movieDetails;
+            }
+            var hit = await _movieShopDbContext.Reviews.Where(h => h.MovieId == id).CountAsync();
+            if(hit == 0)
+            {
+                movieDetails.Rating = 10.0m;
+            }
+            else
+            {
+                movieDetails.Rating = await _movieShopDbContext.Reviews.Where(r => r.MovieId == id).AverageAsync(r => r.Rating);
+            }
+
             return movieDetails;
         }
 

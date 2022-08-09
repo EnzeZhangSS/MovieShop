@@ -118,6 +118,10 @@ namespace Infrastructure.Services
         public async Task<PagedResultSet<MovieCardModel>> GetAllFavoritesForUser(int userid, int pageSize = 30, int page = 1)
         {
             var movies = await _userRepository.GetAllFavoritesPagination(userid, pageSize, page);
+            if (movies == null)
+            {
+                return null;
+            }
 
             var movieCards = new List<MovieCardModel>();
             movieCards.AddRange(movies.Data.Select(m => new MovieCardModel
@@ -133,6 +137,10 @@ namespace Infrastructure.Services
         public async Task<PagedResultSet<MovieCardModel>> GetAllPurchasesForUser(int userid, int pageSize = 30, int page = 1)
         {
             var movies = await _purchaseRepository.GetAllPurchasesPagination(userid, pageSize, page);
+            if (movies == null)
+            {
+                return null;
+            }
 
             var movieCards = new List<MovieCardModel>();
             movieCards.AddRange(movies.Data.Select(m => new MovieCardModel
@@ -148,6 +156,10 @@ namespace Infrastructure.Services
         public async Task<List<ReviewDetailsModel>> GetAllReviewsByUser(int userId)
         {
             var reviews = await _userRepository.GetAllReviews(userId);
+            if(reviews == null)
+            {
+                return null;
+            }
             var reviewDetails = reviews.Select(r => new ReviewDetailsModel
             {
                 MovieId = r.MovieId,

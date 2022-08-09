@@ -66,7 +66,9 @@
 
 						<div class="form-group py-2">
 							<button type="submit" class="btn btn-danger" asp-route-actionId="0" asp-route-movieId="@MovieID">Delete</button>
-							<button type="button" class="btn btn-secondary" asp-controller="Movies" asp-action="Details" asp-route-id="@MovieID">Cancel</button>
+							<a asp-controller="Movies" asp-action="Details" asp-route-id="@MovieID" class="text-decoration-none">
+								<button type="button" class="btn btn-secondary" >Cancel</button>
+							</a>
 							<button type="submit" class="btn btn-primary" asp-route-actionId="1" asp-route-movieId="@MovieID">Submit</button>
 						</div>
 					</form>

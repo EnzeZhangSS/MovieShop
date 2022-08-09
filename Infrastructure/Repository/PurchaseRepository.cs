@@ -25,7 +25,8 @@ namespace Infrastructure.Repository
             var totalPurchasesOfUser = await _movieShopDbContext.Purchases.Where(p => p.UserId == userid).CountAsync();
             if (totalPurchasesOfUser == 0)
             {
-                throw new Exception("You didn't purchase any movie yet.");
+                //throw new Exception("You didn't purchase any movie yet.");
+                return null;
             }
 
             var movies = await _movieShopDbContext.Purchases.Where(p => p.UserId == userid).Include(p => p.Movie).OrderByDescending(p => p.PurchaseDateTime)

@@ -21,6 +21,10 @@ namespace Infrastructure.Services
         public async Task<MovieDetailsModel> GetMovieDetails(int movieId)
         {
             var movieDetails = await _movieRepository.GetById(movieId);
+            if(movieDetails == null)
+            {
+                return null;
+            }
 
             var movieDetailsModel = new MovieDetailsModel
             {
@@ -37,7 +41,9 @@ namespace Infrastructure.Services
                 TmdbUrl = movieDetails.TmdbUrl,
                 RunTime = movieDetails.RunTime,
                 Tagline = movieDetails.Tagline,
-                Price = movieDetails.Price
+                Price = movieDetails.Price,
+                Rating = movieDetails.Rating
+                
             };
 
             foreach (var trailer in movieDetails.Trailers)

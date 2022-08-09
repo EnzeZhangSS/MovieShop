@@ -106,7 +106,8 @@ namespace Infrastructure.Repository
             var totalFavoritesOfUser = await _movieShopDbContext.Favorites.Where(p => p.UserId == userid).CountAsync();
             if (totalFavoritesOfUser == 0)
             {
-                throw new Exception("You didn't add any movie to favorite list yet.");
+                //throw new Exception("You didn't add any movie to favorite list yet.");
+                return null;
             }
 
             var movies = await _movieShopDbContext.Favorites.Where(p => p.UserId == userid).Include(p => p.Movie)
@@ -160,10 +161,11 @@ namespace Infrastructure.Repository
             var totalReviewsOfUser = await _movieShopDbContext.Reviews.Where(r => r.UserId == userid).CountAsync();
             if (totalReviewsOfUser == 0)
             {
-                throw new Exception("You didn't have any review yet.");
+                //throw new Exception("You didn't have any review yet.");
+                return null;
             }
 
-            var reviews = await _movieShopDbContext.Reviews.ToListAsync();
+            var reviews = await _movieShopDbContext.Reviews.Where(r => r.UserId == userid).ToListAsync();
 
             return reviews;
         }
