@@ -124,7 +124,7 @@ namespace MovieShopAPI.Controllers
             if (reviews == null)
             {
                 //404
-                return NotFound(new { errorMessage = "No Favorite Found for this User" });
+                return NotFound(new { errorMessage = "No Review Found for this User" });
             }
 
             return Ok(reviews);

@@ -132,5 +132,50 @@ namespace Infrastructure.Services
             }
             return movieCards;
         }
+
+        public async Task<List<MovieCardModel>> GetTopRatingMovies()
+        {
+            var movies = await _movieRepository.GetTop30RatedMovies();
+
+            var movieCards = new List<MovieCardModel>();
+            foreach (var movie in movies)
+            {
+                movieCards.Add(new MovieCardModel { Id = movie.Id, Title = movie.Title, PosterUrl = movie.PosterUrl });
+            }
+            return movieCards;
+        }
+
+        public async Task<List<ReviewDetailsModel>> GetAllReviewsOfMovie(int movieId)
+        {
+            var reviews = await _movieRepository.GetAllReviews(movieId);
+            if (reviews == null)
+            {
+                return null;
+            }
+            var reviewDetails = reviews.Select(r => new ReviewDetailsModel
+            {
+                MovieId = movieId,
+                UserId = r.UserId,
+                Rating = r.Rating,
+                ReviewText = r.ReviewText,
+                CreatedDate = r.CreatedDate
+            }).ToList();
+            return reviewDetails;
+        }
+
+        public async Task<PagedResultSet<MovieCardModel>> GetMoviesByTitle(string title, int pageSize = 30, int page = 1)
+        {
+            var movies = await _movieRepository.GetMoviesByTitlePagination(title, pageSize, page);
+
+            var movieCards = new List<MovieCardModel>();
+            movieCards.AddRange(movies.Data.Select(m => new MovieCardModel
+            {
+                Id = m.Id,
+                PosterUrl = m.PosterUrl,
+                Title = m.Title
+            }));
+
+            return new PagedResultSet<MovieCardModel>(movieCards, page, pageSize, movies.TotalRowCount);
+        }
     }
 }
